@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import os
-from cffi import FFI
-
-
+import glob
+import shutil
+from cffi import FFI  # type: ignore[import]
 
 HERE = os.path.dirname(__file__)
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
@@ -23,10 +23,7 @@ ffibuilder.set_source(
     include_dirs=[C_DIR],
 )
 
-import shutil
 if __name__ == "__main__":
-    import glob
-    import shutil
     os.makedirs(BUILD_DIR, exist_ok=True)
     ffibuilder.compile(tmpdir=BUILD_DIR, verbose=True)
     # cffi puts the .so in build/optproj/optproj/ (due to module name)

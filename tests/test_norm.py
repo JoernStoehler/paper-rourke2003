@@ -1,4 +1,4 @@
-import numpy as np
+import numpy as np  # type: ignore[import]
 from optproj import l2_norm
 
 def test_l2_norm_basic():
