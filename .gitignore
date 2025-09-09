@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# build artifacts
+build/
+src/optproj/_cext.*
