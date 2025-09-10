@@ -1,17 +1,25 @@
-PY := python3
-PIP := pip3
+VENV_DIR := .venv
+PY := $(VENV_DIR)/bin/python3
+PIP := $(VENV_DIR)/bin/pip3
 
-install:
+.PHONY: all install build test jupyter clean
+
+all: install build
+
+$(VENV_DIR):
+	python3 -m venv $(VENV_DIR)
+
+install: $(VENV_DIR)
 	$(PIP) install -r requirements.txt
 
-build:
+build: $(VENV_DIR)
 	$(PY) scripts/build_cffi.py
 
 test: build
-	PYTHONPATH=src pytest -q
+	PYTHONPATH=src $(PY) -m pytest -q
 
 jupyter: build
-	jupyter lab --ip=0.0.0.0 --no-browser
+	$(PY) -m jupyter lab --ip=0.0.0.0 --no-browser
 
 clean:
 	rm -rf build/

@@ -8,19 +8,59 @@ HERE = os.path.dirname(__file__)
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
 SRC_ROOT = os.path.join(ROOT, "src")
 PKG = "optproj"
-C_DIR = os.path.join(SRC_ROOT, PKG, "c")
+
 BUILD_DIR = os.path.join(ROOT, "build", PKG)
 
 ffibuilder = FFI()
 ffibuilder.cdef("""
     double l2_norm(const double *arr, int n);
+
+    void inradius(
+        const int s, 
+        const double x[], 
+        const double y[],
+        double *r, 
+        double drdx[], 
+        double drdy[]
+    );
+
+    void circumradius(
+        const int s, 
+        const double x[], 
+        const double y[],
+        double *R, 
+        double dRdx[], 
+        double dRdy[]
+    );
+
+    void optimal_partition(
+        const int n,
+        const double x[],
+        const double y[],
+        const int max_m, 
+        const int max_s,
+        int *m, 
+        double s[], 
+        int p[], 
+        double *L, 
+        int *k
+    );
+
+    void gradient_step(
+        const int n,
+        double x[],
+        double y[],
+        const int max_m,
+        const int max_s,
+        const double alpha
+    );
 """)
 
 ffibuilder.set_source(
     f"{PKG}._cext",
-    '#include "norm.h"\n',
-    sources=[os.path.join(C_DIR, "norm.c")],
-    include_dirs=[C_DIR],
+    '#include "numerics.h"\n',
+    sources=[os.path.join(SRC_ROOT, PKG, "numerics.c")],
+    include_dirs=[os.path.join(SRC_ROOT, PKG)],
 )
 
 if __name__ == "__main__":

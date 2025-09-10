@@ -1,21 +1,23 @@
-# optproj (minimal scaffold)
+# Convex Partitions of the Square
 
-Minimal Python+C scaffold using cffi.  
-No hidden magic, all build products isolated in `build/`.
+This project is a numerical exploration of convex partitions of the square, with the goal of finding a partition that minimizes the maximum aspect ratio of its constituent pieces. The aspect ratio is defined as the circumradius divided by the inradius.
+
+This work is an attempt to replicate and improve upon the results of the 2003 paper by Rourke et al.
 
 ## Quickstart
-pip install -r requirements.txt
-make build
+
+```bash
+make
 make test
 make jupyter   # open JupyterLab
+```
+
+This will create a virtual environment in `.venv` and install the required dependencies.
 
 ## Layout
-src/optproj/c/       # C sources and headers
+src/optproj/numerics.c # C source for numerical computations
+src/optproj/numerics.h # C header for numerical computations
 src/optproj/         # Python package
 scripts/             # build script
 tests/               # pytest tests
 build/               # intermediate files (ignored)
-
-## Notes
-- The `build/` directory may contain compiler/intermediate clutter due to cffi/gcc quirks. This is normal for minimal cffi builds.
-- Run `make clean` to remove all build products, intermediates, and Python bytecode caches (`__pycache__`, `.pyc`).
