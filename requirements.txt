@@ -3,3 +3,4 @@ cffi
 pytest
 jupyterlab
 matplotlib
+jaxtyping

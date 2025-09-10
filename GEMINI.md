@@ -15,17 +15,27 @@ The methodology involves numerically optimizing the positions of vertices within
 
 ## 2. Folder Structure
 
-The project follows a canonical structure to ensure predictability and ease of navigation:
+The project is organized as follows:
 
-- **`/src/optproj/`**: The main Python package source code.
-- **`/src/optproj/numerics.c`**: C source file for numerical computations.
-- **`/src/optproj/numerics.h`**: C header file for numerical computations.
-- **`/src/optproj/numerics.py`**: Python wrapper for the C functions.
-- **`/tests/`**: Unit tests for the Python and C components. All test files should be prefixed with `test_`.
-- **`/scripts/`**: Build and utility scripts.
-- **`/build/`**: Intermediate and final build artifacts. This directory is ignored by Git.
-- **`/Makefile`**: Defines common project commands.
-- **`/requirements.txt`**: A list of Python dependencies.
+```
+.
+├── Makefile              # Defines common tasks like install, build, test
+├── README.md             # High-level project overview
+├── GEMINI.md             # This file: onboarding guide for developers
+├── requirements.txt      # Project dependencies
+├── docs/
+│   └── mathematical_details.md # Detailed math, roadmap, etc.
+├── scripts/
+│   └── build_cffi.py     # Builds the C extension using cffi
+├── src/
+│   └── optproj/          # Main Python package
+│       ├── __init__.py   # Exposes the public API
+│       ├── numerics.c    # C source for performance-critical code
+│       ├── numerics.h    # Header for the C source
+│       └── numerics.py   # Python wrapper for the C functions
+└── tests/
+    └── test_numerics.py  # Pytest tests for the numerics module
+```
 
 ## 3. Common Commands
 
